@@ -27,4 +27,7 @@ public class Address {
     private String ddd;
     private String gia;
     private String siafi;
+
+    private Double latitude;
+    private Double longitude;
 }
