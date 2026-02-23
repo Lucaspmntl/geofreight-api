@@ -1,7 +1,6 @@
 package me.lucaspmntl.geofreight.service;
 
-import me.lucaspmntl.geofreight.dto.brasilapi.BrasilApiDTO;
-import me.lucaspmntl.geofreight.model.Address;
+import me.lucaspmntl.geofreight.dto.BrasilApiDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
