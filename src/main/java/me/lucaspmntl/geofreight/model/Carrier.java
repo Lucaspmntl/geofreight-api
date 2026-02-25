@@ -2,6 +2,7 @@ package me.lucaspmntl.geofreight.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -10,15 +11,20 @@ import lombok.*;
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
-public class Modal {
+public class Carrier {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Setter(AccessLevel.NONE)
     private Long id;
 
-    private String name;
+    @OneToMany
+    @JoinColumn(name = "carrier_id")
+    private List<FreightTariff> freightTariff;
 
-    @Column(columnDefinition = "TEXT")
-    private String description;
+    private String name;
+    private String cnpj;
+    private String email;
+
+
 }
