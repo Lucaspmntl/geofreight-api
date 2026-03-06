@@ -8,8 +8,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @Service
 @FeignClient(name = "brasil-api", url = "brasilapi.com.br/api/cep/v2/")
+/**
+ * Cliente Feign para integração com a BrasilAPI.
+ * Objetivo de obter dados de latitude e longitude para uso em {@link OsrmService}.
+ */
 public interface BrasilApiService {
 
+    /**
+     * @param cep -> CEP informado
+     * @return {@link BrasilApiDTO} -> Contém os dados de longitude e latitude
+     */
     @GetMapping("/{cep}")
     public BrasilApiDTO getAddressByCep(@PathVariable String cep);
 }
