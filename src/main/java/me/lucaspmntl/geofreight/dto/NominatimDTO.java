@@ -6,4 +6,3 @@ public record NominatimDTO(
         String type
 ) {
 }
-
