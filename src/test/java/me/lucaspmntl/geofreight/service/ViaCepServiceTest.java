@@ -15,3 +15,4 @@ class ViaCepServiceTest {
         stubFor(get())
     }
 }
+

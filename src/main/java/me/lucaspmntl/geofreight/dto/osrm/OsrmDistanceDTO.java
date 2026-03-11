@@ -1,4 +1,4 @@
-package me.lucaspmntl.geofreight.dto;
+package me.lucaspmntl.geofreight.dto.osrm;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -8,10 +8,3 @@ import java.util.List;
 public record OsrmDistanceDTO(
     List<RouteDTO> routes
 ) {}
-
-@JsonIgnoreProperties(ignoreUnknown = true)
-record RouteDTO(
-        double duration,
-        double distance
-) {}
-

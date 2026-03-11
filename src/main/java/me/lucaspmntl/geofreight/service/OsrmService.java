@@ -1,14 +1,14 @@
 package me.lucaspmntl.geofreight.service;
 
-import me.lucaspmntl.geofreight.dto.OsrmDistanceDTO;
+import me.lucaspmntl.geofreight.dto.osrm.OsrmDistanceDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @FeignClient(name = "osrm", url = "http://router.project-osrm.org/route/v1/driving")
-/**
- * Cliente Feign para integração com o serviço OSRM.
- * Responsável por calcular a distância entre dois pontos.
+/*
+  Cliente Feign para integração com o serviço OSRM.
+  Responsável por calcular a distância entre dois pontos.
  */
 public interface OsrmService {
 

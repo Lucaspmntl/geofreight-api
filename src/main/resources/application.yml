@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: GeoFreight
+
+brasilapi:
+  url:
+    "https://brasilapi.com.br/api/cep/v2/"
+
+nominatim:
+  url:
+    "https://nominatim.openstreetmap.org"
