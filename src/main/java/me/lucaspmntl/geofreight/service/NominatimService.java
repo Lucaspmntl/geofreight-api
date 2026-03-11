@@ -8,13 +8,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
-@FeignClient(name = "nominatim", url = "https://nominatim.openstreetmap.org")
+@FeignClient(name = "nominatim", url = "${nominatim.url}")
 public interface NominatimService {
 
-    @GetMapping("/search")
-    List<NominatimDTO> getCoordinatesByAddress(
-            @RequestParam("q") String query,
-            @RequestParam("format") String format,
-            @RequestParam("limit") int limit
-    );
+    @GetMapping("/search?format=json&limit=2")
+    List<NominatimDTO> getCoordinatesByAddress( @RequestParam("q") String query );
 }

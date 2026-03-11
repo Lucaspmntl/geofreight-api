@@ -1,4 +1,4 @@
-package me.lucaspmntl.geofreight.dto;
+package me.lucaspmntl.geofreight.dto.brasilapi;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

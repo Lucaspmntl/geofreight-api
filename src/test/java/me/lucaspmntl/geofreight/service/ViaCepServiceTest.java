@@ -12,3 +12,4 @@ class ViaCepServiceTest {
     void getAddressByCep() {
     }
 }
+
