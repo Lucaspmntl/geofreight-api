@@ -22,7 +22,7 @@ class BrasilApiServiceTest {
     @Test
     void shouldReturnCoordinatesWhenValidCep() {
         String cep = "76873228";
-        String correctJson = """
+        String json = """
                 {
                   "cep": "76873228",
                   "state": "RO",
@@ -42,7 +42,7 @@ class BrasilApiServiceTest {
 
         stubFor(get
                 (urlPathEqualTo("/api/cep/v2/" + cep))
-                .willReturn(okJson(correctJson)));
+                .willReturn(okJson(json)));
 
         BrasilApiDTO response = brasilApiService.getCoordinatesByCep(cep);
 

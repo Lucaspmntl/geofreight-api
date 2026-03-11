@@ -5,3 +5,7 @@ brasilapi:
 nominatim:
   url:
     "http://localhost:8089"
+
+viacep:
+  url:
+    "http://localhost:8089"

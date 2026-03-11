@@ -1,13 +1,13 @@
 package me.lucaspmntl.geofreight.service;
 
+import me.lucaspmntl.geofreight.dto.AddressDTO;
 import me.lucaspmntl.geofreight.model.Address;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@Service
-@FeignClient(name = "via-cep", url = "viacep.com.br/ws")
+@FeignClient(name = "via-cep", url = "${viacep.url}")
 /*
  * Cliente Feign para integração com o serviço ViaCEP.
  * Responsável por obter os dados cadastrais de endereço (logradouro, bairro, cidade e UF)
@@ -20,5 +20,5 @@ public interface ViaCepService {
      * @return {@link Address} -> Endereço encontrado
      */
     @GetMapping("/{cep}/json")
-    public Address getAddressByCep(@PathVariable String cep);
+    public AddressDTO getAddressByCep(@PathVariable String cep);
 }

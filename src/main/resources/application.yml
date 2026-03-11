@@ -9,3 +9,7 @@ brasilapi:
 nominatim:
   url:
     "https://nominatim.openstreetmap.org"
+
+viacep:
+  url:
+    "https://viacep.com.br/ws"

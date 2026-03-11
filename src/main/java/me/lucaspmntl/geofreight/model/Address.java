@@ -23,6 +23,7 @@ public class Address {
     private String city;
     private String uf;
     private String state;
+    private String region;
     private String ibge;
     private String ddd;
     private String gia;
