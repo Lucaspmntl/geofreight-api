@@ -1,0 +1,7 @@
+brasilapi:
+  url:
+    "http://localhost:8089"
+
+nominatim:
+  url:
+    "http://localhost:8089"
