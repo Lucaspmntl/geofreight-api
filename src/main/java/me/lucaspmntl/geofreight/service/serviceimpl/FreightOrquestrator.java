@@ -1,16 +1,15 @@
 package me.lucaspmntl.geofreight.service.serviceimpl;
 
 import me.lucaspmntl.geofreight.dto.AddressDTO;
-import me.lucaspmntl.geofreight.dto.brasilapi.BrasilApiDTO;
 import me.lucaspmntl.geofreight.dto.brasilapi.CoordinatesDTO;
 import me.lucaspmntl.geofreight.model.Coordinates;
 import me.lucaspmntl.geofreight.service.BrasilApiService;
 import me.lucaspmntl.geofreight.service.NominatimService;
 import me.lucaspmntl.geofreight.service.ViaCepService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.util.List;
-
+@Service
 public class FreightOrquestrator {
 
     @Autowired

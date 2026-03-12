@@ -2,6 +2,7 @@ package me.lucaspmntl.geofreight.service;
 
 import com.github.tomakehurst.wiremock.junit5.WireMockTest;
 import me.lucaspmntl.geofreight.dto.NominatimDTO;
+import me.lucaspmntl.geofreight.dto.brasilapi.CoordinatesDTO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -47,12 +48,12 @@ class NominatimServiceTest {
                 .withQueryParam("q", containing(query))
                 .willReturn(okJson(json)));
 
-        List<NominatimDTO> response = nominatimService.getCoordinatesByAddress(query);
+        List<CoordinatesDTO> response = nominatimService.getCoordinatesByAddress(query);
 
         assertNotNull(response);
         assertEquals(response.size(), 1);
-        assertEquals(response.getFirst().lat(), "-9.9173597");
-        assertEquals(response.getFirst().lon(), "-63.0304959");
+        assertEquals(response.getFirst().latitude(), "-9.9173597");
+        assertEquals(response.getFirst().longitude(), "-63.0304959");
     }
 }
 

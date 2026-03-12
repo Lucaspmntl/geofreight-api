@@ -44,6 +44,7 @@ class BrasilApiServiceTest {
                 (urlPathEqualTo("/api/cep/v2/" + cep))
                 .willReturn(okJson(json)));
 
+        // TODO: Tratamento de erro
         BrasilApiDTO response = brasilApiService.getCoordinatesByCep(cep);
 
         assertNotNull(response);

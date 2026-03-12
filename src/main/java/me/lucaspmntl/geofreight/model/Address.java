@@ -1,5 +1,6 @@
 package me.lucaspmntl.geofreight.model;
 
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.*;
@@ -29,6 +30,6 @@ public class Address {
     private String gia;
     private String siafi;
 
-    private Double latitude;
-    private Double longitude;
+    @Embedded
+    private Coordinates coordinates;
 }
