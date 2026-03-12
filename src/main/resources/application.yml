@@ -13,3 +13,7 @@ nominatim:
 viacep:
   url:
     "https://viacep.com.br/ws"
+
+osrm:
+  url:
+    "https://router.project-osrm.org"

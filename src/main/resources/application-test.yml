@@ -9,3 +9,7 @@ nominatim:
 viacep:
   url:
     "http://localhost:8089"
+
+osrm:
+  url:
+    "http://localhost:8089"

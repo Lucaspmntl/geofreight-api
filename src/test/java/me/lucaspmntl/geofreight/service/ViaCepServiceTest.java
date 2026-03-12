@@ -19,7 +19,7 @@ class ViaCepServiceTest {
     private ViaCepService viaCepService;
 
     @Test
-    void mustReturnCorrectAddress() {
+    void shouldReturnCorrectAddress() {
         String cep = "76873228";
         String json = """
                 {

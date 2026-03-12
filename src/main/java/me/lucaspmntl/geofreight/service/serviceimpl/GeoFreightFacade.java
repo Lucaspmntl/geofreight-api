@@ -12,12 +12,12 @@ public class FacadeServiceImpl {
     // 01310-200 - sao paulo
 
     @Autowired
-    ViaCepService viaCepService;
+    FreightOrquestrator freightOrquestrator;
 
     public void getFreight(String originCep, String destinationCep){
 
-        AddressDTO origin = viaCepService.getAddressByCep(originCep);
-        AddressDTO destination = viaCepService.getAddressByCep(destinationCep);
+        AddressDTO origin = freightOrquestrator.getAddress(originCep);
+        AddressDTO destination = freightOrquestrator.getAddress(destinationCep);
 
     }
 }
