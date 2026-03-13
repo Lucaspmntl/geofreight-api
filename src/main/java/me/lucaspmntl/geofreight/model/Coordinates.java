@@ -11,6 +11,6 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Coordinates {
-    Double latitude;
     Double longitude;
+    Double latitude;
 }
