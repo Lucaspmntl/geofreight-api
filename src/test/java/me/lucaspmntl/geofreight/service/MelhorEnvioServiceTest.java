@@ -264,28 +264,29 @@ class MelhorEnvioServiceTest {
                 ]
                 """;
 
-        MelhorEnvioRequestDTO request = new MelhorEnvioRequestDTO(
+        MelhorEnvioRequestDTO requestDTO = new MelhorEnvioRequestDTO(
                 new From("68900238"),
                 new To("57839029"),
-                List.of(new Product("5", 20, 30, 40, 50, 15, 1)),
-                new Options(true, false),
-                "Nothing");
+                List.of(new Product(5, 20, 30, 40, 50, 15)));
 
         stubFor(post(urlPathEqualTo("/api/v2/me/shipment/calculate"))
                 .willReturn(okJson(json)));
 
-        List<MelhorEnvioResponseDTO> response = melhorEnvioService.getFreights(request);
+        List<MelhorEnvioResponseDTO> response = melhorEnvioService.getFreights(
+                "123456789123456789123456789",
+                "Test@gmail.com",
+                requestDTO);
 
         assertNotNull(response);
         assertEquals(5, response.size());
 
-        assertEquals(37.79, response.get(0).price());
-        assertEquals("PAC", response.get(0).name());
+        assertEquals(37.79, response.get(0).transportCompanyPrice());
+        assertEquals("PAC", response.get(0).transportName());
         assertEquals("Correios", response.get(0).company().name());
         assertEquals(9, response.get(0).deliveryTime());
 
-        assertEquals(46.23, response.get(1).price());
-        assertEquals("SEDEX", response.get(1).name());
+        assertEquals(46.23, response.get(1).transportCompanyPrice());
+        assertEquals("SEDEX", response.get(1).transportName());
         assertEquals("Correios", response.get(1).company().name());
         assertEquals(4, response.get(1).deliveryTime());
     }

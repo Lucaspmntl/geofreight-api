@@ -5,8 +5,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public record MelhorEnvioResponseDTO(
-        String name,
-        Double price,
+        @JsonProperty("name")
+        String transportName,
+
+        @JsonProperty("price")
+        Double transportCompanyPrice,
+
+        double ferryPrice,
+
+        double totalPrice,
 
         @JsonProperty("delivery_time")
         Integer deliveryTime,
