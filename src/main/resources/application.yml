@@ -17,3 +17,9 @@ viacep:
 osrm:
   url:
     "https://router.project-osrm.org"
+
+melhor-envio:
+  url:
+    "https://melhorenvio.com.br"
+
+

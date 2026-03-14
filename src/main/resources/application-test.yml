@@ -13,3 +13,7 @@ viacep:
 osrm:
   url:
     "http://localhost:8089"
+
+melhor-envio:
+  url:
+    "http://localhost:8089"

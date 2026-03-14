@@ -2,12 +2,16 @@ package me.lucaspmntl.geofreight.service.serviceimpl;
 
 import me.lucaspmntl.geofreight.dto.AddressDTO;
 import me.lucaspmntl.geofreight.dto.brasilapi.CoordinatesDTO;
+import me.lucaspmntl.geofreight.dto.osrm.OsrmDistanceDTO;
+import me.lucaspmntl.geofreight.dto.osrm.RouteDTO;
 import me.lucaspmntl.geofreight.model.Coordinates;
 import me.lucaspmntl.geofreight.service.BrasilApiService;
 import me.lucaspmntl.geofreight.service.NominatimService;
+import me.lucaspmntl.geofreight.service.OsrmService;
 import me.lucaspmntl.geofreight.service.ViaCepService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Service
 public class FreightOrquestrator {
@@ -20,6 +24,9 @@ public class FreightOrquestrator {
 
     @Autowired
     NominatimService nominatimService;
+
+    @Autowired
+    OsrmService osrmService;
 
     public AddressDTO getAddress(String cep){
         AddressDTO address = viaCepService.getAddressByCep(cep);
@@ -50,5 +57,18 @@ public class FreightOrquestrator {
                 address.siafi(),
                 new Coordinates(coordinates.longitude(), coordinates.latitude())
         );
+    }
+
+    public RouteDTO getDistance(double longitudeOrigin,
+                                double latitudeOrigin,
+                                double longitudeDestination,
+                                double latitudeDestination){
+
+        return osrmService.getDistance(
+                longitudeOrigin,
+                latitudeOrigin,
+                longitudeDestination,
+                latitudeDestination)
+                .routes().getFirst();
     }
 }
