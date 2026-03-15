@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.Optional;
+
 @FeignClient(name = "via-cep", url = "${viacep.url}")
 /*
  * Cliente Feign para integração com o serviço ViaCEP.

@@ -15,8 +15,8 @@ public class GeoFreightFacade {
 
     public void getFreight(String originCep, String destinationCep){
 
-        AddressDTO origin = freightOrquestrator.getAddress(originCep);
-        AddressDTO destination = freightOrquestrator.getAddress(destinationCep);
+//        AddressDTO origin = freightOrquestrator.getAddress(originCep);
+//        AddressDTO destination = freightOrquestrator.getAddress(destinationCep);
 
     }
 }

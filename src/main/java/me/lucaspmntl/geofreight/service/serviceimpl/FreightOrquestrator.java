@@ -2,17 +2,13 @@ package me.lucaspmntl.geofreight.service.serviceimpl;
 
 import me.lucaspmntl.geofreight.dto.AddressDTO;
 import me.lucaspmntl.geofreight.dto.GeoFreightResponseDTO;
-import me.lucaspmntl.geofreight.dto.brasilapi.CoordinatesDTO;
 import me.lucaspmntl.geofreight.dto.melhorenvio.request.MelhorEnvioRequestDTO;
 import me.lucaspmntl.geofreight.dto.melhorenvio.request.Product;
 import me.lucaspmntl.geofreight.dto.melhorenvio.response.MelhorEnvioResponseDTO;
-import me.lucaspmntl.geofreight.dto.osrm.OsrmDistanceDTO;
-import me.lucaspmntl.geofreight.dto.osrm.RouteDTO;
-import me.lucaspmntl.geofreight.model.Coordinates;
+import me.lucaspmntl.geofreight.exception.*;
 import me.lucaspmntl.geofreight.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -20,69 +16,34 @@ import java.util.List;
 public class FreightOrquestrator {
 
     @Autowired
-    BrasilApiService brasilApiService;
-
-    @Autowired
     ViaCepService viaCepService;
 
     @Autowired
-    NominatimService nominatimService;
-
-    @Autowired
     MelhorEnvioService melhorEnvioService;
-
-    public AddressDTO getAddress(String cep){
-        AddressDTO address = viaCepService.getAddressByCep(cep);
-
-        CoordinatesDTO coordinates = brasilApiService
-                .getCoordinatesByCep(cep)
-                .location()
-                .coordinates();
-
-        if (coordinates.latitude() == null || coordinates.longitude() == null){
-
-            coordinates = nominatimService.getCoordinatesByAddress(cep).getFirst();
-        }
-
-        return new AddressDTO(
-                address.cep(),
-                address.street(),
-                address.complement(),
-                address.unit(),
-                address.neighborhood(),
-                address.city(),
-                address.region(),
-                address.uf(),
-                address.state(),
-                address.ibge(),
-                address.ddd(),
-                address.gia(),
-                address.siafi(),
-                new Coordinates(coordinates.longitude(), coordinates.latitude())
-        );
-    }
-
 
     public List<GeoFreightResponseDTO> getFreightsOptions(String cepOrigin, String cepDestination, MelhorEnvioRequestDTO dto) {
 
         double ferryCost = ferryPriceCalculator(dto.products());
         int ferryDays = 2;
 
-        List<MelhorEnvioResponseDTO> response = melhorEnvioService.getFreights(cepOrigin, cepDestination, dto);
+        addressValidator(cepOrigin, cepDestination);
+
+        List<MelhorEnvioResponseDTO> response = melhorEnvioService
+                .getFreights("token", "email", dto);
 
         return response.stream()
-                .map(MelhorEnvioResponseDTO -> new GeoFreightResponseDTO(
-                        MelhorEnvioResponseDTO.transportName(),
-                        MelhorEnvioResponseDTO.transportCompanyPrice(),
+                .map(obj -> new GeoFreightResponseDTO(
+                        obj.transportName(),
+                        obj.transportCompanyPrice(),
                         ferryCost,
-                        MelhorEnvioResponseDTO.transportCompanyPrice() + ferryCost,
-                        MelhorEnvioResponseDTO.deliveryTime() + ferryDays,
-                        MelhorEnvioResponseDTO.company()
+                        obj.transportCompanyPrice() + ferryCost,
+                        obj.deliveryTime() + ferryDays,
+                        obj.company()
                 )).toList();
     }
 
 
-    public double ferryPriceCalculator(List<Product> products){
+    private double ferryPriceCalculator(List<Product> products){
         double totalWeight = products.stream()
                 .mapToDouble(Product::weight)
                 .sum();
@@ -98,4 +59,38 @@ public class FreightOrquestrator {
         return (dispatchTariff + custPerKg + adValorem);
     }
 
+    private void addressValidator(String cepOrigin, String cepDestination){
+
+        AddressDTO originAddress = getCepWithContext(cepOrigin,
+                "O CEP de origem informado é inválido ou não foi encontrado");
+
+        AddressDTO destinationAddress = getCepWithContext(cepDestination,
+                "O CEP de destino informado é inválido ou não foi encontrado");
+
+        boolean notToAmapa = !originAddress.uf().equalsIgnoreCase("AP")
+                && !destinationAddress.uf().equalsIgnoreCase("AP");
+
+        boolean amapaToAmapa = originAddress.uf().equalsIgnoreCase("AP")
+                && destinationAddress.uf().equalsIgnoreCase("AP");
+
+        if (notToAmapa)
+            throw new NonAmapaAddresException("A rota informada é inválida: \n" +
+                    "O serviço logístico exige que a origem ou o destino pertença ao estado do Amapá (AP).!");
+
+        if (amapaToAmapa) {
+            throw new AmapaToAmapaException("A rota informada é inválida: \n" +
+                    "Rotas de transporte logístico interno (origem e destino dentro do Amapá) não são suportadas por esta modalidade.");
+        }
+    }
+
+
+    private AddressDTO getCepWithContext(String cep, String erroMessage){
+        try{
+            return viaCepService.getAddressByCep(cep);
+        } catch (ExternalIntegrationException e) {
+            throw new ExternalIntegrationException(erroMessage);
+        }
+    }
+
 }
+
