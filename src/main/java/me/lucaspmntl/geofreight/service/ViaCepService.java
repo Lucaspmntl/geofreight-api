@@ -1,13 +1,9 @@
 package me.lucaspmntl.geofreight.service;
 
 import me.lucaspmntl.geofreight.dto.AddressDTO;
-import me.lucaspmntl.geofreight.model.Address;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-
-import java.util.Optional;
 
 @FeignClient(name = "via-cep", url = "${viacep.url}")
 /*
@@ -19,7 +15,7 @@ public interface ViaCepService {
 
     /**
      * @param cep -> CEP informado
-     * @return {@link Address} -> Endereço encontrado
+     * @return {@link AddressDTO} -> Endereço encontrado
      */
     @GetMapping("/{cep}/json")
     public AddressDTO getAddressByCep(@PathVariable String cep);

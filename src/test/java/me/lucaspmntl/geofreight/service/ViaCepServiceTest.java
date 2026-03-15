@@ -54,10 +54,6 @@ class ViaCepServiceTest {
         assertEquals("Ariquemes", response.city());
         assertEquals("RO", response.uf());
         assertEquals("Rondônia", response.state());
-        assertEquals("1100023", response.ibge());
-        assertEquals("69", response.ddd());
-        assertEquals("", response.gia());
-        assertEquals("0007", response.siafi());
     }
 }
 

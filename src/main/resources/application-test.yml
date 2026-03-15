@@ -1,16 +1,4 @@
-brasilapi:
-  url:
-    "http://localhost:8089"
-
-nominatim:
-  url:
-    "http://localhost:8089"
-
 viacep:
-  url:
-    "http://localhost:8089"
-
-osrm:
   url:
     "http://localhost:8089"
 

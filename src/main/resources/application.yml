@@ -2,24 +2,10 @@ spring:
   application:
     name: GeoFreight
 
-brasilapi:
-  url:
-    "https://brasilapi.com.br/api/cep/v2/"
-
-nominatim:
-  url:
-    "https://nominatim.openstreetmap.org"
-
 viacep:
   url:
     "https://viacep.com.br/ws"
 
-osrm:
-  url:
-    "https://router.project-osrm.org"
-
 melhor-envio:
   url:
     "https://melhorenvio.com.br"
-
-
