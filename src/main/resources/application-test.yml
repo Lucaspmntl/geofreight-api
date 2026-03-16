@@ -5,3 +5,7 @@ viacep:
 melhor-envio:
   url:
     "http://localhost:8089"
+  token:
+    "token-for-teste"
+  email:
+    "email@test.com"

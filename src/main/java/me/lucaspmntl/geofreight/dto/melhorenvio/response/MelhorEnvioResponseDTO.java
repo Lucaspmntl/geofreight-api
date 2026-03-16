@@ -11,10 +11,6 @@ public record MelhorEnvioResponseDTO(
         @JsonProperty("price")
         Double transportCompanyPrice,
 
-        double ferryPrice,
-
-        double totalPrice,
-
         @JsonProperty("delivery_time")
         Integer deliveryTime,
         CompanyDTO company

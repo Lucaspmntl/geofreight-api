@@ -19,11 +19,11 @@ import java.util.List;
 @Service
 public class FreightOrquestrator {
 
-    @Value("${melhorenvio.token}")
-    String token;
+    @Value("${melhor-envio.token}")
+    private String token;
 
-    @Value("${melhorenvio.email}")
-    String email;
+    @Value("${melhor-envio.email}")
+    private String email;
 
     @Autowired
     ViaCepService viaCepService;
@@ -105,12 +105,11 @@ public class FreightOrquestrator {
 
 
 
-
-    private AddressDTO getCepWithContext(String cep, String erroMessage){
+    private AddressDTO getCepWithContext(String cep, String errorMessage){
         try{
             return viaCepService.getAddressByCep(cep);
         } catch (ExternalIntegrationException e) {
-            throw new ExternalIntegrationException(erroMessage);
+            throw new ExternalIntegrationException(errorMessage);
         }
     }
 

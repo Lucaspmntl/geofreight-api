@@ -3,6 +3,7 @@ package me.lucaspmntl.geofreight.service;
 import com.github.tomakehurst.wiremock.junit5.WireMockTest;
 import me.lucaspmntl.geofreight.dto.melhorenvio.request.*;
 import me.lucaspmntl.geofreight.dto.melhorenvio.response.MelhorEnvioResponseDTO;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,7 +23,8 @@ class MelhorEnvioServiceTest {
     MelhorEnvioService melhorEnvioService;
 
     @Test
-    void shouldReturnCorrectJson() {
+    @DisplayName("Deve retornar o json com as opções de fretes")
+    void case1() {
         String json = """
                 [
                   {

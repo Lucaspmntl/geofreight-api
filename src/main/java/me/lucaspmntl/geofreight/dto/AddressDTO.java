@@ -22,12 +22,12 @@ public record AddressDTO(
         @JsonProperty("localidade")
         String city,
 
-        @JsonProperty("regiao")
-        String region,
-
         String uf,
 
         @JsonProperty("estado")
-        String state
+        String state,
+
+        @JsonProperty("regiao")
+        String region
 ) {
 }

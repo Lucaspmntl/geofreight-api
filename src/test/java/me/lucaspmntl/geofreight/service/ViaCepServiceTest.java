@@ -46,7 +46,7 @@ class ViaCepServiceTest {
         AddressDTO response = viaCepService.getAddressByCep(cep);
 
         assertNotNull(response);
-        assertEquals("76873-228", response.cep());
+            assertEquals("76873-228", response.cep());
         assertEquals("Rua Uirapuru", response.street());
         assertEquals("de 1513/1514 a 1974/1975", response.complement());
         assertEquals("", response.unit());
