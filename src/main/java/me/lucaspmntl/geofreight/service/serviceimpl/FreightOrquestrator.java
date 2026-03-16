@@ -1,13 +1,17 @@
 package me.lucaspmntl.geofreight.service.serviceimpl;
 
 import me.lucaspmntl.geofreight.dto.AddressDTO;
+import me.lucaspmntl.geofreight.dto.GeoFreightRequestDTO;
 import me.lucaspmntl.geofreight.dto.GeoFreightResponseDTO;
+import me.lucaspmntl.geofreight.dto.melhorenvio.request.From;
 import me.lucaspmntl.geofreight.dto.melhorenvio.request.MelhorEnvioRequestDTO;
 import me.lucaspmntl.geofreight.dto.melhorenvio.request.Product;
+import me.lucaspmntl.geofreight.dto.melhorenvio.request.To;
 import me.lucaspmntl.geofreight.dto.melhorenvio.response.MelhorEnvioResponseDTO;
 import me.lucaspmntl.geofreight.exception.*;
 import me.lucaspmntl.geofreight.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,21 +19,33 @@ import java.util.List;
 @Service
 public class FreightOrquestrator {
 
+    @Value("${melhorenvio.token}")
+    String token;
+
+    @Value("${melhorenvio.email}")
+    String email;
+
     @Autowired
     ViaCepService viaCepService;
 
     @Autowired
     MelhorEnvioService melhorEnvioService;
 
-    public List<GeoFreightResponseDTO> getFreightsOptions(String cepOrigin, String cepDestination, MelhorEnvioRequestDTO dto) {
+    public List<GeoFreightResponseDTO> getFreightsOptions(GeoFreightRequestDTO dto) {
+
+        MelhorEnvioRequestDTO melhorEnvioDto = new MelhorEnvioRequestDTO(
+                new From(dto.cepOrigin()),
+                new To(dto.cepDestination()),
+                dto.products()
+        );
 
         double ferryCost = ferryPriceCalculator(dto.products());
         int ferryDays = 2;
 
-        addressValidator(cepOrigin, cepDestination);
+        addressValidator(dto.cepOrigin(), dto.cepDestination());
 
         List<MelhorEnvioResponseDTO> response = melhorEnvioService
-                .getFreights("token", "email", dto);
+                .getFreights(token, email, melhorEnvioDto);
 
         return response.stream()
                 .map(obj -> new GeoFreightResponseDTO(
@@ -41,6 +57,7 @@ public class FreightOrquestrator {
                         obj.company()
                 )).toList();
     }
+
 
 
     private double ferryPriceCalculator(List<Product> products){
@@ -58,6 +75,8 @@ public class FreightOrquestrator {
 
         return (dispatchTariff + custPerKg + adValorem);
     }
+
+
 
     private void addressValidator(String cepOrigin, String cepDestination){
 
@@ -79,9 +98,12 @@ public class FreightOrquestrator {
 
         if (amapaToAmapa) {
             throw new AmapaToAmapaException("A rota informada é inválida: \n" +
-                    "Rotas de transporte logístico interno (origem e destino dentro do Amapá) não são suportadas por esta modalidade.");
+                    "Rotas de transporte logístico interno (origem e destino dentro do Amapá)" +
+                    " não são suportadas por esta modalidade.");
         }
     }
+
+
 
 
     private AddressDTO getCepWithContext(String cep, String erroMessage){
