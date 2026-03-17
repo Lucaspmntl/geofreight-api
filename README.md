@@ -283,5 +283,5 @@ O perfil `test` (`application-test.yml`) redireciona todas as chamadas para o Wi
 
 **Lucas Santos Pimentel**
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-blue?style=flat&logo=linkedin)](https://linkedin.com/in/seu-usuario)
-[![GitHub](https://img.shields.io/badge/GitHub-black?style=flat&logo=github)](https://github.com/seu-usuario)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-blue?style=flat&logo=linkedin)]([https://linkedin.com/in/seu-usuario](https://www.linkedin.com/in/lucas-pimentel-7117121b5/))
+[![GitHub](https://img.shields.io/badge/GitHub-black?style=flat&logo=github)]([https://github.com/seu-usuario](https://github.com/Lucaspmntl))
