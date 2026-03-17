@@ -98,13 +98,13 @@ public class FreightOrquestrator {
                 && destinationAddress.uf().equalsIgnoreCase("AP");
 
         if (notToAmapa)
-            throw new NonAmapaAddresException("A rota informada é inválida: \n" +
-                    "O serviço logístico exige que a origem ou o destino pertença ao estado do Amapá (AP).!");
+            throw new NonAmapaAddresException("A rota informada é inválida: " +
+                    "O serviço logístico exige que a origem ou o destino pertença ao estado do Amapá (AP).");
 
         if (amapaToAmapa) {
-            throw new AmapaToAmapaException("A rota informada é inválida: \n" +
+            throw new AmapaToAmapaException("A rota informada é inválida: " +
                     "Rotas de transporte logístico interno (origem e destino dentro do Amapá)" +
-                    " não são suportadas por esta modalidade.");
+                    "não são suportadas por esta modalidade.");
         }
     }
 
