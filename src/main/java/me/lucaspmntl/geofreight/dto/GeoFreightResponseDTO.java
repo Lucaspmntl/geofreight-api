@@ -1,16 +1,17 @@
 package me.lucaspmntl.geofreight.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import me.lucaspmntl.geofreight.dto.melhorenvio.response.CompanyDTO;
+
+import java.math.BigDecimal;
 
 public record GeoFreightResponseDTO(
 
         String transportName,
 
-        Double transportCompanyPrice,
-        double ferryPrice,
+        BigDecimal transportCompanyPrice,
+        BigDecimal ferryPrice,
 
-        double totalPrice,
+        BigDecimal totalPrice,
 
         Integer deliveryTime,
         CompanyDTO company

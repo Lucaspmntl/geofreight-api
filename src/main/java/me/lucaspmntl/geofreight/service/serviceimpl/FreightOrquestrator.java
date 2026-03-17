@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 @Service
@@ -39,7 +41,7 @@ public class FreightOrquestrator {
                 dto.products()
         );
 
-        double ferryCost = ferryPriceCalculator(dto.products());
+        BigDecimal ferryCost = ferryPriceCalculator(dto.products());
         int ferryDays = 2;
 
         addressValidator(dto.cepOrigin(), dto.cepDestination());
@@ -53,7 +55,7 @@ public class FreightOrquestrator {
                         obj.transportName(),
                         obj.transportCompanyPrice(),
                         ferryCost,
-                        obj.transportCompanyPrice() + ferryCost,
+                        obj.transportCompanyPrice().add(ferryCost),
                         obj.deliveryTime() + ferryDays,
                         obj.company()
                 )).toList();
@@ -61,7 +63,7 @@ public class FreightOrquestrator {
 
 
 
-    private double ferryPriceCalculator(List<Product> products){
+    private BigDecimal ferryPriceCalculator(List<Product> products){
         double totalWeight = products.stream()
                 .mapToDouble(Product::weight)
                 .sum();
@@ -74,7 +76,9 @@ public class FreightOrquestrator {
         double custPerKg = totalWeight * 2.50;
         double adValorem = declaredValue * 0.01;
 
-        return (dispatchTariff + custPerKg + adValorem);
+        double result = (dispatchTariff + custPerKg + adValorem);
+
+        return BigDecimal.valueOf(result).setScale(2, RoundingMode.HALF_UP);
     }
 
 
