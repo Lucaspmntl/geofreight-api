@@ -1,5 +1,6 @@
 package me.lucaspmntl.geofreight.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import me.lucaspmntl.geofreight.dto.melhorenvio.response.CompanyDTO;
 
 public record GeoFreightResponseDTO(
@@ -8,6 +9,7 @@ public record GeoFreightResponseDTO(
 
         Double transportCompanyPrice,
         double ferryPrice,
+
         double totalPrice,
 
         Integer deliveryTime,

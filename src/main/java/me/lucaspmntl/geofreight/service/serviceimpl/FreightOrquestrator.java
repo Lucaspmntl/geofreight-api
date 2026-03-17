@@ -45,9 +45,10 @@ public class FreightOrquestrator {
         addressValidator(dto.cepOrigin(), dto.cepDestination());
 
         List<MelhorEnvioResponseDTO> response = melhorEnvioService
-                .getFreights(token, email, melhorEnvioDto);
+                .getFreights("Bearer "+ token, "GeoFreight-API (" + email + ")", melhorEnvioDto);
 
         return response.stream()
+                .filter(obj -> obj.transportCompanyPrice() != null && obj.deliveryTime() != null)
                 .map(obj -> new GeoFreightResponseDTO(
                         obj.transportName(),
                         obj.transportCompanyPrice(),
