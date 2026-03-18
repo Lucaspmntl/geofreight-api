@@ -20,5 +20,4 @@ public class GeoFreightApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(GeoFreightApplication.class, args);
 	}
-
 }
