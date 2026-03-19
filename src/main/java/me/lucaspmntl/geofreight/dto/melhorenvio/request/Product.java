@@ -18,6 +18,6 @@ public record Product(
         @NotEmpty double insuranceValue,
 
         @NotEmpty
-        @Min(value = 1, message = "A quantidade miníma de um produto deve ser 1.")
+        @Min(value = 1, message = "${validation-message.min-number}")
         int quantity
 ) {}

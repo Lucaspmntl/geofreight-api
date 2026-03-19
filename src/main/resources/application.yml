@@ -12,6 +12,12 @@ melhor-envio:
   url:
     "https://melhorenvio.com.br"
 
-required:
-  field:
-    " é obrigatório e não pode ser nulo ou vazio"
+validation-message:
+  required-field:
+    "O campo é obrigatório e não pode ser nulo ou vazio."
+
+  invalid-cep:
+    "O CEP deve conter pelo menos 8 caracteres."
+
+  min-number:
+    "O valor deve ser maior que 0."

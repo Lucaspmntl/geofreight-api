@@ -1,5 +1,6 @@
 package me.lucaspmntl.geofreight.controller;
 
+import jakarta.validation.Valid;
 import me.lucaspmntl.geofreight.dto.GeoFreightRequestDTO;
 import me.lucaspmntl.geofreight.dto.GeoFreightResponseDTO;
 import me.lucaspmntl.geofreight.service.serviceimpl.FreightOrquestrator;
@@ -21,7 +22,7 @@ public class GeoFreightController {
 
     @PostMapping(value = "/shippings", consumes = "application/json", produces = "application/json")
     public ResponseEntity<List<GeoFreightResponseDTO>> getFreightsOptions(
-            @RequestBody GeoFreightRequestDTO geoFreightRequestDTO) {
+            @RequestBody @Valid GeoFreightRequestDTO geoFreightRequestDTO) {
 
             List<GeoFreightResponseDTO> response = freightOrquestrator.getFreightsOptions(geoFreightRequestDTO);
 
