@@ -11,3 +11,7 @@ viacep:
 melhor-envio:
   url:
     "https://melhorenvio.com.br"
+
+required:
+  field:
+    " é obrigatório e não pode ser nulo ou vazio"

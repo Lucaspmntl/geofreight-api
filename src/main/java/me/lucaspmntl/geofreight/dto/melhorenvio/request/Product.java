@@ -2,16 +2,22 @@ package me.lucaspmntl.geofreight.dto.melhorenvio.request;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public record Product(
-        int width,
-        int height,
-        int length,
-        double weight,
+
+        @NotEmpty int width,
+        @NotEmpty int height,
+        @NotEmpty int length,
+        @NotEmpty double weight,
 
         @JsonProperty("insurance_value")
-        double insuranceValue,
+        @NotEmpty double insuranceValue,
 
+        @NotEmpty
+        @Min(value = 1, message = "A quantidade miníma de um produto deve ser 1.")
         int quantity
 ) {}
