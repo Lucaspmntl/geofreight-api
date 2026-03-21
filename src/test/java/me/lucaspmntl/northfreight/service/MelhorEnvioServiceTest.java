@@ -1,4 +1,4 @@
-package me.lucaspmntl.geofreight.service;
+package me.lucaspmntl.northfreight.service;
 
 import com.github.tomakehurst.wiremock.junit5.WireMockTest;
 import me.lucaspmntl.northfreight.dto.melhorenvio.request.From;

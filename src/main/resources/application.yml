@@ -1,6 +1,6 @@
 spring:
   application:
-    name: GeoFreight
+    name: NorthFreight
   profiles:
     active: prod
 

@@ -1,4 +1,4 @@
-package me.lucaspmntl.geofreight;
+package me.lucaspmntl.northfreight;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Contact;
@@ -10,7 +10,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @SpringBootApplication
 @EnableFeignClients
 @OpenAPIDefinition(info = @Info(
-		title = "GeoFreight API",
+		title = "NorthFreight API",
 		version = "1.0.0",
 		description = "API para cálculo de fretes regionais (Amapá)",
 		contact = @Contact(url = "https://github.com/Lucaspmntl", name = "Lucas Pimentel")

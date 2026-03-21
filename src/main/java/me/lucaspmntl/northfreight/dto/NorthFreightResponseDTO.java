@@ -1,6 +1,6 @@
-package me.lucaspmntl.geofreight.dto;
+package me.lucaspmntl.northfreight.dto;
 
-import me.lucaspmntl.geofreight.dto.melhorenvio.response.CompanyDTO;
+import me.lucaspmntl.northfreight.dto.melhorenvio.response.CompanyDTO;
 
 import java.math.BigDecimal;
 

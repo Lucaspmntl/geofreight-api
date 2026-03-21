@@ -1,8 +1,8 @@
-package me.lucaspmntl.geofreight.decoder;
+package me.lucaspmntl.northfreight.decoder;
 
 import feign.Response;
 import feign.codec.ErrorDecoder;
-import me.lucaspmntl.geofreight.exception.ExternalIntegrationException;
+import me.lucaspmntl.northfreight.exception.ExternalIntegrationException;
 import org.springframework.stereotype.Component;
 
 @Component

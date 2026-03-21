@@ -1,9 +1,7 @@
-package me.lucaspmntl.geofreight.dto.melhorenvio.response;
+package me.lucaspmntl.northfreight.dto.melhorenvio.response;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
 

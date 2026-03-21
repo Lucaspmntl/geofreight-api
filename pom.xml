@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>me.lucaspmntl</groupId>
-	<artifactId>geofreight-api</artifactId>
+	<artifactId>northfreight-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>GeoFreight</name>
+	<name>NorthFreight</name>
 	<description>Orquestrador de logística regional com padrão Facade.</description>
 	<url/>
 	<licenses>
@@ -38,6 +38,11 @@
 			<version>2.8.14</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.wiremock.integrations</groupId>
+			<artifactId>wiremock-spring-boot</artifactId>
+			<version>4.0.9</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

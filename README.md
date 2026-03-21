@@ -1,8 +1,24 @@
-# 🚢 GeoFreight Orchestrator
+# 🚢 NorthFreight Orchestrator
 
-> **API de orquestração logística B2B** para o cálculo preciso de fretes com destino ou origem do Amapá, injetando as variáveis reais do transporte fluvial que API's de frete tradicionais ignoram.
+> **API de orquestração logística B2B** para o cálculo preciso de fretes com destino ao Amapá, injetando as variáveis reais do transporte fluvial (balsa) que as transportadoras tradicionais ignoram.
 
-*Desenvolvido durante o bootcamp da **Accenture** em parceria com a **Digital Innovation One (DIO)**, aplicando na prática conceitos de arquitetura de software e padrões de projeto (Facade).*
+*Desenvolvido durante o bootcamp da **Accenture** em parceria com a **Digital Innovation One (DIO)**, aplicando na prática conceitos de arquitetura de software e padrões de projeto.*
+
+---
+
+## 📌 Sumário
+
+- [O Problema](#-o-problema)
+- [A Solução](#-a-solução)
+- [Arquitetura e Fluxo](#-arquitetura-e-fluxo)
+- [Endpoints da API](#-endpoints-da-api)
+- [Lógica de Cálculo da Balsa](#-lógica-de-cálculo-da-balsa)
+- [Regras de Validação de Rota](#-regras-de-validação-de-rota)
+- [Tratamento de Erros](#-tratamento-de-erros)
+- [Stack e Padrões de Projeto](#-stack-e-padrões-de-projeto)
+- [Como Rodar o Projeto](#-como-rodar-o-projeto)
+- [Testes](#-testes)
+- [Próximos Passos](#-próximos-passos)
 
 ---
 
@@ -18,24 +34,24 @@ As APIs de cotação de frete do mercado — como o Melhor Envio — foram proje
 | Custo por kg em embarcações | Tarifa diferente da rodoviária |
 | Ad valorem ajustado para risco fluvial | Seguro de carga subdimensionado |
 
-O resultado seria um **ponto cego financeiro**: empresas e e-commerces absorvem prejuízo por cotar fretes com valores irreais.
+O resultado é um **ponto cego financeiro**: empresas e e-commerces absorvem prejuízo por cotar fretes com valores irreais.
 
 ---
 
 ## 🎯 A Solução
 
-O **GeoFreight Orchestrator** atua como uma camada de orquestração **B2B** entre o cliente e as APIs de frete existentes.
+O **NorthFreight Orchestrator** atua como uma camada de orquestração **B2B** entre o cliente e as APIs de frete existentes.
 
-O fluxo é esse: a API intercepta a requisição de cotação, valida a rota (garantindo que envolve o Amapá), busca os fretes base no Melhor Envio e **injeta automaticamente o custo real da balsa** no resultado — entregando ao negócio um preço total honesto para a operação.
+O fluxo é simples: a API intercepta a requisição de cotação, valida a rota (garantindo que envolve o Amapá), busca os fretes base no Melhor Envio e **injeta automaticamente o custo real da balsa** no resultado — entregando ao negócio um preço total honesto para a operação.
 
 ```
-Cliente (B2B)  →  GeoFreight API  →  ViaCEP (validação de rota)
+Cliente (B2B)  →  NorthFreight API  →  ViaCEP (validação de rota)
                         ↓
-            Melhor Envio (frete base)
+              Melhor Envio (frete base)
                         ↓
                 Cálculo da Balsa
                         ↓
-     Resposta consolidada com custo total real
+        Resposta consolidada com custo real
 ```
 
 ---
@@ -45,12 +61,12 @@ Cliente (B2B)  →  GeoFreight API  →  ViaCEP (validação de rota)
 O projeto segue uma estrutura em camadas com as seguintes responsabilidades:
 
 ```
-src/main/java/me/lucaspmntl/geofreight/
+src/main/java/me/lucaspmntl/northfreight/
 ├── controller/          # Entrada HTTP
 ├── service/             # Clientes Feign
 │   └── serviceimpl/     # Orquestração de negócio
 ├── dto/                 # Contratos de dados
-│   └── melhorenvio/     # DTOs específicos da integração Melhor Envio
+│   └── melhorenvio/     # DTOs do melhor envio
 ├── exception/           # Exceções de domínio
 ├── handler/             # GlobalExceptionHandler
 └── decoder/             # GlobalFeignErrorDecoder
@@ -58,7 +74,7 @@ src/main/java/me/lucaspmntl/geofreight/
 
 **Fluxo de uma requisição:**
 
-1. `GeoFreightController` recebe o `POST /api/v1/shippings`
+1. `NorthFreightController` recebe o `POST /api/v1/shippings`
 2. `FreightOrquestrator` constrói o DTO para o Melhor Envio
 3. `FreightOrquestrator` chama o `ViaCepService` para validar a rota (origem e destino)
 4. Com a rota validada, chama o `MelhorEnvioService` para buscar os fretes base
@@ -67,7 +83,7 @@ src/main/java/me/lucaspmntl/geofreight/
 
 ---
 
-## 📡 Endpoint da API
+## 📡 Endpoints da API
 
 ### `POST /api/v1/shippings`
 
@@ -133,29 +149,12 @@ Calcula e retorna as opções de frete disponíveis para a rota informada, com o
 | Campo | Descrição |
 |---|---|
 | `transportName` | Nome da modalidade de transporte |
-| `transportCompanyPrice` | Custo da transportadora |
-| `ferryPrice` | Custo calculado da balsa |
-| `totalPrice` | Custo total real |
-| `deliveryTime` | Prazo total em dias |
+| `transportCompanyPrice` | Custo da transportadora (Melhor Envio) |
+| `ferryPrice` | Custo calculado da balsa (regra regional) |
+| `totalPrice` | Custo total real (`transportCompanyPrice + ferryPrice`) |
+| `deliveryTime` | Prazo total em dias (transportadora + 2 dias de balsa) |
 | `company.name` | Nome da empresa transportadora |
 
----
-
-## ⚓ Lógica de Cálculo da Balsa
-
-O custo da balsa é calculado pelo método `ferryPriceCalculator` com base em três componentes:
-
-```
-Custo da Balsa = Taxa de Despacho + Custo por Peso + Ad Valorem
-```
-
-| Componente | Fórmula | Descrição |
-|---|---|---|
-| **Taxa de Despacho** | `R$ 35,00` (fixo) | Tarifa portuária por embarque |
-| **Custo por Peso** | `peso_total_kg × R$ 2,50` | Tarifa por quilo nas embarcações |
-| **Ad Valorem** | `valor_declarado × 1%` | Seguro ajustado ao risco fluvial |
-
-Além do custo financeiro, o prazo de entrega é acrescido de **2 dias úteis** referentes ao trânsito fluvial.
 
 ---
 
@@ -237,10 +236,10 @@ melhor-envio:
 
 ```bash
 # Clone o repositório
-git clone https://github.com/seu-usuario/geofreight-orchestrator.git
+git clone https://github.com/Lucaspmntl/northfreight-orchestrator.git
 
 # Acesse a pasta do projeto
-cd geofreight-orchestrator
+cd northfreight-orchestrator
 
 # Compile e execute
 ./mvnw spring-boot:run
@@ -281,7 +280,4 @@ O perfil `test` (`application-test.yml`) redireciona todas as chamadas para o Wi
 
 ## 👨‍💻 Autor
 
-**Lucas Santos Pimentel**
-
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-blue?style=flat&logo=linkedin)]([https://linkedin.com/in/seu-usuario](https://www.linkedin.com/in/lucas-pimentel-7117121b5/))
-[![GitHub](https://img.shields.io/badge/GitHub-black?style=flat&logo=github)]([https://github.com/seu-usuario](https://github.com/Lucaspmntl))
+**Lucas Pimentel**

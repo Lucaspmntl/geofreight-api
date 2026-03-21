@@ -13,7 +13,7 @@ import me.lucaspmntl.northfreight.exception.AmapaToAmapaException;
 import me.lucaspmntl.northfreight.exception.NonAmapaAddresException;
 import me.lucaspmntl.northfreight.service.MelhorEnvioService;
 import me.lucaspmntl.northfreight.service.ViaCepService;
-import me.lucaspmntl.northfreight.service.FreightOrquestrator;
+import me.lucaspmntl.northfreight.service.serviceimpl.FreightOrquestrator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

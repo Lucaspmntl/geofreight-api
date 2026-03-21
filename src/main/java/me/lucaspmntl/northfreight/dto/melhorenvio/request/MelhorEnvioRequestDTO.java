@@ -1,6 +1,4 @@
-package me.lucaspmntl.geofreight.dto.melhorenvio.request;
-
-import jakarta.validation.constraints.NotNull;
+package me.lucaspmntl.northfreight.dto.melhorenvio.request;
 
 import java.util.List;
 

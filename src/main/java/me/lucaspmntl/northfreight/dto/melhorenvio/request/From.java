@@ -1,4 +1,4 @@
-package me.lucaspmntl.geofreight.dto.melhorenvio.request;
+package me.lucaspmntl.northfreight.dto.melhorenvio.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Min;

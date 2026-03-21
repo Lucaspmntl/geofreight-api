@@ -1,9 +1,9 @@
-package me.lucaspmntl.geofreight.controller;
+package me.lucaspmntl.northfreight.controller;
 
 import jakarta.validation.Valid;
-import me.lucaspmntl.geofreight.dto.NorthFreightRequestDTO;
-import me.lucaspmntl.geofreight.dto.NorthFreightResponseDTO;
-import me.lucaspmntl.geofreight.service.serviceimpl.FreightOrquestrator;
+import me.lucaspmntl.northfreight.dto.NorthFreightRequestDTO;
+import me.lucaspmntl.northfreight.dto.NorthFreightResponseDTO;
+import me.lucaspmntl.northfreight.service.serviceimpl.FreightOrquestrator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1")
-public class GeoFreightController {
+public class NorthFreightController {
 
     @Autowired
     private FreightOrquestrator freightOrquestrator;

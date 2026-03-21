@@ -1,7 +1,7 @@
-package me.lucaspmntl.geofreight.service;
+package me.lucaspmntl.northfreight.service;
 
-import me.lucaspmntl.geofreight.dto.melhorenvio.request.MelhorEnvioRequestDTO;
-import me.lucaspmntl.geofreight.dto.melhorenvio.response.MelhorEnvioResponseDTO;
+import me.lucaspmntl.northfreight.dto.melhorenvio.request.MelhorEnvioRequestDTO;
+import me.lucaspmntl.northfreight.dto.melhorenvio.response.MelhorEnvioResponseDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

@@ -1,4 +1,4 @@
-package me.lucaspmntl.geofreight.dto;
+package me.lucaspmntl.northfreight.dto;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;

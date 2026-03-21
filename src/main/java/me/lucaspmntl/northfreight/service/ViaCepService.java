@@ -1,6 +1,6 @@
-package me.lucaspmntl.geofreight.service;
+package me.lucaspmntl.northfreight.service;
 
-import me.lucaspmntl.geofreight.dto.AddressDTO;
+import me.lucaspmntl.northfreight.dto.AddressDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

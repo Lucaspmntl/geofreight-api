@@ -1,7 +1,10 @@
-package me.lucaspmntl.geofreight.handler;
+package me.lucaspmntl.northfreight.handler;
 
-import me.lucaspmntl.geofreight.dto.ExceptionDTO;
-import me.lucaspmntl.geofreight.exception.*;
+import me.lucaspmntl.northfreight.dto.ExceptionDTO;
+import me.lucaspmntl.northfreight.exception.*;
+import me.lucaspmntl.northfreight.exception.AmapaToAmapaException;
+import me.lucaspmntl.northfreight.exception.ExternalIntegrationException;
+import me.lucaspmntl.northfreight.exception.NonAmapaAddresException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
