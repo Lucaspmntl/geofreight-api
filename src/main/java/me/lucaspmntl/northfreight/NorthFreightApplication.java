@@ -15,9 +15,9 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 		description = "API para cálculo de fretes regionais (Amapá)",
 		contact = @Contact(url = "https://github.com/Lucaspmntl", name = "Lucas Pimentel")
 ))
-public class GeoFreightApplication {
+public class NorthFreightApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(GeoFreightApplication.class, args);
+		SpringApplication.run(NorthFreightApplication.class, args);
 	}
 }

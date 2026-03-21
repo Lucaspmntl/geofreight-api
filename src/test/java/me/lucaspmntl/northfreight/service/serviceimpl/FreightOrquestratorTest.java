@@ -1,18 +1,19 @@
-package me.lucaspmntl.geofreight.service.serviceimpl;
+package me.lucaspmntl.northfreight.service.serviceimpl;
 
-import me.lucaspmntl.geofreight.dto.AddressDTO;
-import me.lucaspmntl.geofreight.dto.GeoFreightRequestDTO;
-import me.lucaspmntl.geofreight.dto.GeoFreightResponseDTO;
-import me.lucaspmntl.geofreight.dto.melhorenvio.request.From;
-import me.lucaspmntl.geofreight.dto.melhorenvio.request.MelhorEnvioRequestDTO;
-import me.lucaspmntl.geofreight.dto.melhorenvio.request.Product;
-import me.lucaspmntl.geofreight.dto.melhorenvio.request.To;
-import me.lucaspmntl.geofreight.dto.melhorenvio.response.CompanyDTO;
-import me.lucaspmntl.geofreight.dto.melhorenvio.response.MelhorEnvioResponseDTO;
-import me.lucaspmntl.geofreight.exception.AmapaToAmapaException;
-import me.lucaspmntl.geofreight.exception.NonAmapaAddresException;
-import me.lucaspmntl.geofreight.service.MelhorEnvioService;
-import me.lucaspmntl.geofreight.service.ViaCepService;
+import me.lucaspmntl.northfreight.dto.AddressDTO;
+import me.lucaspmntl.northfreight.dto.NorthFreightRequestDTO;
+import me.lucaspmntl.northfreight.dto.NorthFreightResponseDTO;
+import me.lucaspmntl.northfreight.dto.melhorenvio.request.From;
+import me.lucaspmntl.northfreight.dto.melhorenvio.request.MelhorEnvioRequestDTO;
+import me.lucaspmntl.northfreight.dto.melhorenvio.request.Product;
+import me.lucaspmntl.northfreight.dto.melhorenvio.request.To;
+import me.lucaspmntl.northfreight.dto.melhorenvio.response.CompanyDTO;
+import me.lucaspmntl.northfreight.dto.melhorenvio.response.MelhorEnvioResponseDTO;
+import me.lucaspmntl.northfreight.exception.AmapaToAmapaException;
+import me.lucaspmntl.northfreight.exception.NonAmapaAddresException;
+import me.lucaspmntl.northfreight.service.MelhorEnvioService;
+import me.lucaspmntl.northfreight.service.ViaCepService;
+import me.lucaspmntl.northfreight.service.FreightOrquestrator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,6 +22,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.context.ActiveProfiles;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -63,23 +65,23 @@ class FreightOrquestratorTest {
                 .thenReturn(List.of(
                         new MelhorEnvioResponseDTO(
                         "Pac",
-                        10.0,
+                                BigDecimal.valueOf(10.0),
                         20,
                         new CompanyDTO("Correios")
                 ),
                         new MelhorEnvioResponseDTO("Jadlog",
-                                20.0,
+                                BigDecimal.valueOf(20.0),
                                 30,
                                 new CompanyDTO("Jadlog"))));
 
-        GeoFreightRequestDTO externalRequest = new GeoFreightRequestDTO(
+        NorthFreightRequestDTO externalRequest = new NorthFreightRequestDTO(
                 "76873228",
                 "68901092",
                 List.of(new Product(10, 20, 30, 5.0, 50, 1))
         );
 
 
-        List<GeoFreightResponseDTO> response = orquestrator.getFreightsOptions(externalRequest);
+        List<NorthFreightResponseDTO> response = orquestrator.getFreightsOptions(externalRequest);
 
         assertNotNull(response);
         assertEquals(2, response.size());
@@ -111,7 +113,7 @@ class FreightOrquestratorTest {
                 .thenReturn(new AddressDTO("68901-092", "Avenida Doutor Acelino de Leão", "até 1248/1249",
                         "", "Trem", "Macapá", "AP", "Amapá", "Norte"));
 
-        GeoFreightRequestDTO externalRequest = new GeoFreightRequestDTO(
+        NorthFreightRequestDTO externalRequest = new NorthFreightRequestDTO(
                 "689382864",
                 "68901092",
                 List.of(new Product(10, 20, 30, 5.0, 50, 1))
@@ -132,7 +134,7 @@ class FreightOrquestratorTest {
                 .thenReturn(new AddressDTO("47948-783", "Avenida Brasil", "até 1248/1249",
                         "", "Centro", "São Paulo", "sp", "São Paulo", "Centro-Oeste"));
 
-        GeoFreightRequestDTO externalRequest = new GeoFreightRequestDTO(
+        NorthFreightRequestDTO externalRequest = new NorthFreightRequestDTO(
                 "76873228",
                 "47948783",
                 List.of(new Product(10, 20, 30, 5.0, 50, 1))

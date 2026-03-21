@@ -1,23 +1,24 @@
-package me.lucaspmntl.geofreight.dto.melhorenvio.request;
+package me.lucaspmntl.northfreight.dto.melhorenvio.request;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public record Product(
 
-        @NotEmpty int width,
-        @NotEmpty int height,
-        @NotEmpty int length,
-        @NotEmpty double weight,
+        @NotNull int width,
+        @NotNull int height,
+        @NotNull int length,
+        @NotNull double weight,
 
         @JsonProperty("insurance_value")
-        @NotEmpty double insuranceValue,
+        @NotNull double insuranceValue,
 
-        @NotEmpty
-        @Min(value = 1, message = "${validation-message.min-number}")
+        @NotNull
+        @Positive(message = "${validation-message.min-number}")
         int quantity
 ) {}

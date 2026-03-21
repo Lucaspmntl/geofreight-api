@@ -4,7 +4,7 @@ import me.lucaspmntl.geofreight.dto.melhorenvio.response.CompanyDTO;
 
 import java.math.BigDecimal;
 
-public record GeoFreightResponseDTO(
+public record NorthFreightResponseDTO(
 
         String transportName,
 

@@ -1,8 +1,8 @@
 package me.lucaspmntl.geofreight.service.serviceimpl;
 
 import me.lucaspmntl.geofreight.dto.AddressDTO;
-import me.lucaspmntl.geofreight.dto.GeoFreightRequestDTO;
-import me.lucaspmntl.geofreight.dto.GeoFreightResponseDTO;
+import me.lucaspmntl.geofreight.dto.NorthFreightRequestDTO;
+import me.lucaspmntl.geofreight.dto.NorthFreightResponseDTO;
 import me.lucaspmntl.geofreight.dto.melhorenvio.request.From;
 import me.lucaspmntl.geofreight.dto.melhorenvio.request.MelhorEnvioRequestDTO;
 import me.lucaspmntl.geofreight.dto.melhorenvio.request.Product;
@@ -33,7 +33,7 @@ public class FreightOrquestrator {
     @Autowired
     MelhorEnvioService melhorEnvioService;
 
-    public List<GeoFreightResponseDTO> getFreightsOptions(GeoFreightRequestDTO dto) {
+    public List<NorthFreightResponseDTO> getFreightsOptions(NorthFreightRequestDTO dto) {
 
         MelhorEnvioRequestDTO melhorEnvioDto = new MelhorEnvioRequestDTO(
                 new From(dto.cepOrigin()),
@@ -51,7 +51,7 @@ public class FreightOrquestrator {
 
         return response.stream()
                 .filter(obj -> obj.transportCompanyPrice() != null && obj.deliveryTime() != null)
-                .map(obj -> new GeoFreightResponseDTO(
+                .map(obj -> new NorthFreightResponseDTO(
                         obj.transportName(),
                         obj.transportCompanyPrice(),
                         ferryCost,

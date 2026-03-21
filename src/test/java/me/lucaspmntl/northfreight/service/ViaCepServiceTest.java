@@ -1,7 +1,8 @@
 package me.lucaspmntl.geofreight.service;
 
 import com.github.tomakehurst.wiremock.junit5.WireMockTest;
-import me.lucaspmntl.geofreight.dto.AddressDTO;
+import me.lucaspmntl.northfreight.dto.AddressDTO;
+import me.lucaspmntl.northfreight.service.ViaCepService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

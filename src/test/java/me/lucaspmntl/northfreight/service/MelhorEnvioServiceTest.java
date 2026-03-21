@@ -1,8 +1,12 @@
 package me.lucaspmntl.geofreight.service;
 
 import com.github.tomakehurst.wiremock.junit5.WireMockTest;
-import me.lucaspmntl.geofreight.dto.melhorenvio.request.*;
-import me.lucaspmntl.geofreight.dto.melhorenvio.response.MelhorEnvioResponseDTO;
+import me.lucaspmntl.northfreight.dto.melhorenvio.request.From;
+import me.lucaspmntl.northfreight.dto.melhorenvio.request.MelhorEnvioRequestDTO;
+import me.lucaspmntl.northfreight.dto.melhorenvio.request.Product;
+import me.lucaspmntl.northfreight.dto.melhorenvio.request.To;
+import me.lucaspmntl.northfreight.dto.melhorenvio.response.MelhorEnvioResponseDTO;
+import me.lucaspmntl.northfreight.service.MelhorEnvioService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

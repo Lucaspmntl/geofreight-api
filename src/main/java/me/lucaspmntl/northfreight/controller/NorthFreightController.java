@@ -1,8 +1,8 @@
 package me.lucaspmntl.geofreight.controller;
 
 import jakarta.validation.Valid;
-import me.lucaspmntl.geofreight.dto.GeoFreightRequestDTO;
-import me.lucaspmntl.geofreight.dto.GeoFreightResponseDTO;
+import me.lucaspmntl.geofreight.dto.NorthFreightRequestDTO;
+import me.lucaspmntl.geofreight.dto.NorthFreightResponseDTO;
 import me.lucaspmntl.geofreight.service.serviceimpl.FreightOrquestrator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,10 +21,10 @@ public class GeoFreightController {
     private FreightOrquestrator freightOrquestrator;
 
     @PostMapping(value = "/shippings", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<List<GeoFreightResponseDTO>> getFreightsOptions(
-            @RequestBody @Valid GeoFreightRequestDTO geoFreightRequestDTO) {
+    public ResponseEntity<List<NorthFreightResponseDTO>> getFreightsOptions(
+            @RequestBody @Valid NorthFreightRequestDTO requestDto) {
 
-            List<GeoFreightResponseDTO> response = freightOrquestrator.getFreightsOptions(geoFreightRequestDTO);
+            List<NorthFreightResponseDTO> response = freightOrquestrator.getFreightsOptions(requestDto);
 
             return ResponseEntity.ok(response);
     }
